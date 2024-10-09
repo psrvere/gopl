@@ -1,4 +1,4 @@
-package echo1
+package chapter1
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func BenchmarkStringConcantenation(b *testing.B) {
 		b.Run("Quadratic-Len-"+strconv.Itoa(len(cmd)), func(b *testing.B) {
 			setupArgs(cmd)
 			for i := 0; i < b.N; i++ {
-				quadraticConcatenation()
+				QuadraticConcatenation()
 			}
 		})
 	}
@@ -24,7 +24,7 @@ func BenchmarkStringConcantenation(b *testing.B) {
 		b.Run("Linear-Len-"+strconv.Itoa(len(cmd)), func(b *testing.B) {
 			setupArgs(cmd)
 			for i := 0; i < b.N; i++ {
-				linearConcatenation()
+				LinearConcatenation()
 			}
 		})
 	}
@@ -39,7 +39,7 @@ func BenchmarkStringConcantenationParallel(b *testing.B) {
 		b.Run("Quadratic-Len-"+strconv.Itoa(len(cmd)), func(b *testing.B) {
 			b.RunParallel(func(p *testing.PB) {
 				for p.Next() {
-					quadraticConcatenation()
+					QuadraticConcatenation()
 				}
 			})
 		})
@@ -50,7 +50,7 @@ func BenchmarkStringConcantenationParallel(b *testing.B) {
 		b.Run("Linear-Len-"+strconv.Itoa(len(cmd)), func(b *testing.B) {
 			b.RunParallel(func(p *testing.PB) {
 				for p.Next() {
-					linearConcatenation()
+					LinearConcatenation()
 				}
 			})
 		})

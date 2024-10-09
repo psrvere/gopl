@@ -1,13 +1,12 @@
 package chapter1
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image/gif"
+	"io"
 	"math"
 	"math/rand"
-	"os"
 )
 
 var palette = []color.Color{color.White, color.Black}
@@ -17,7 +16,7 @@ const (
 	blackIndex = 1
 )
 
-func Lissajous() {
+func Lissajous(w io.Writer) {
 	const (
 		cycles  = 5
 		res     = 0.001
@@ -29,7 +28,6 @@ func Lissajous() {
 	anim := gif.GIF{LoopCount: nframes}
 	phase := 0.0
 	for i := 0; i < nframes; i++ {
-		fmt.Println("i: ", i)
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
 		max := cycles * 2 * math.Pi
@@ -42,5 +40,5 @@ func Lissajous() {
 		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
 	}
-	gif.EncodeAll(os.Stdout, &anim)
+	gif.EncodeAll(w, &anim)
 }
