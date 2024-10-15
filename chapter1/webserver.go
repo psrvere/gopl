@@ -2,6 +2,7 @@ package chapter1
 
 import (
 	"fmt"
+	"gopl/chapter3"
 	"log"
 	"net/http"
 	"sync"
@@ -58,9 +59,18 @@ func handler3(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// WebServer4 runs Lissajous program on web server
 func WebServer4() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		Lissajous(w)
+	})
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+}
+
+// WebServer5 runs Surface program from chapter 3
+func WebServer5() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		chapter3.Surface(w)
 	})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
