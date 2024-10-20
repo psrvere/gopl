@@ -68,4 +68,20 @@ func Examples() {
 
 	fmt.Printf("Min Float64: %8.3g\n", math.SmallestNonzeroFloat64) // 4.9e-324
 	fmt.Printf("Min Float32: %8.3g\n", math.SmallestNonzeroFloat32) // 1.4e-45
+
+	// Use float64 in general. Float32 computations accumulate errors rapidly
+	var f1 float32 = 1 << 24
+	fmt.Println("float32 precision check: ", f1 == f1+1) // true
+
+	var f2 float64 = 1 << 24
+	fmt.Println("float64 precision check: ", f2 == f2+1) // false
+
+	// positive infinity
+	fmt.Println(math.Inf(0))
+
+	// negative infinity
+	fmt.Println(math.Inf(-1))
+
+	nan := math.NaN()
+	fmt.Println(nan == nan, nan < nan, nan > nan) // false, false, false
 }
